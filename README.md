@@ -1,9 +1,9 @@
-# narayana-algoritm
+# naraiana-algoritm
 Алгоритм Нараяны и прочие шифрования
 
 # INSTALL
 
-    $ git clone https://github.com/darviarush/narayana-algoritm.git
+    $ git clone https://github.com/darviarush/naraiana-algoritm.git
 
 ## Алгоритм Нараяны
 
@@ -29,7 +29,7 @@
 
 ### Скомпилировать и запустить тестовый пример
 
-    $ cd narayana-algoritm
+    $ cd naraiana-algoritm
     $ make
 
 # LICENSE
