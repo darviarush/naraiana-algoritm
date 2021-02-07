@@ -27,6 +27,8 @@ int main(int ac, char **av)
     FILE* f = fopen(file, "rb");
     if(!f) { perror(file); return 1; }
 
+
+    char out_file[1024];
     char key[39];
  
     int i, j, t, h;
@@ -50,12 +52,21 @@ int main(int ac, char **av)
         }
 
         if(line < from_line) continue;
+
+        key[36] = '\0';
      
+        snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
+        FILE* q = fopen(out_file, "wb");
+        if(!q) { perror(file); return 1; }
+
+
         struct lc4 lc4;
         bzero(&lc4, sizeof(lc4));
         lc4_init(&lc4, key);
         for (i = 0; i < iteration_count; i++)
-            printf("%c", lc4_encrypt(&lc4, symbol));
+            fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
+
+        fclose(q);
     }
 
     fclose(f);
