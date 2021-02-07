@@ -65,8 +65,6 @@ for arg in av:
 
     python3 Naraiana_algorithm.py  +10  5 4 2 3 1
 """)
-    elif arg == '-':
-
     elif arg[0] == '+':
         n = int(arg[1:])
     elif arg[0] == '-':
