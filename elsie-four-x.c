@@ -57,7 +57,7 @@ int main(int ac, char **av)
      
         snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
         FILE* q = fopen(out_file, "wb");
-        if(!q) { perror(file); return 1; }
+        if(!q) { perror(out_file); return 1; }
 
 
         struct lc4 lc4;
