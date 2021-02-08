@@ -31,10 +31,10 @@ int main(int ac, char **av)
     char out_file[1024];
     char key[39];
  
-    int i, j, t, h;
+    int i, j, t, h, line;
     unsigned char b;
 
-    for(int line = 0; line <= to_line; line++) {
+    for(line = 0; line <= to_line; line++) {
 
         if(fgets(key, sizeof(key), f) == NULL) {
             fprintf(stderr, "file %s line %i: end of file, but may be %i lines\n", file, line, to_line);
@@ -61,7 +61,7 @@ int main(int ac, char **av)
 
 
         struct lc4 lc4;
-        bzero(&lc4, sizeof(lc4));
+        memset(&lc4, 0, sizeof(lc4));
         lc4_init(&lc4, key);
         for (i = 0; i < iteration_count; i++)
             fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
