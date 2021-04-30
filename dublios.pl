@@ -8,6 +8,7 @@
 $| = 1;
 
 $dir = $ARGV[0] // "dublios-data";
+$max_len_period = $ARGV[1] // 1024
 
 # получаем файлы в папке
 while(<$dir/*>) {
@@ -23,7 +24,7 @@ while(<$dir/*>) {
 
 	# ищем период повторяющийся трижды
 	$period = "";
-	for $i (2..1024) {
+	for $i (2..$max_len_period) {
 		last if ($period) = $s =~ /(.{$i})\1\1\z/s;
 	}
 
