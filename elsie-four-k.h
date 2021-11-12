@@ -61,7 +61,7 @@ lc4_valid(const char *key)
 }
 
 static void
-lc4_init(struct lc4 *lc4, const char *key)
+lc4_init(struct lc4 *lc4, const char *key, int mark)
 {
     int i;
     lc4->i = 0;
@@ -70,6 +70,10 @@ lc4_init(struct lc4 *lc4, const char *key)
         int k = lc4_value(key[i]);
         lc4->s[i / 6][i % 6] = k;
         lc4->rev[k] = i;
+		if(key[i] == mark) {
+			lc4->i = i / 6;
+			lc4->j = i % 6;
+		}
     }
 }
 
@@ -100,7 +104,7 @@ lc4_rotate_col(struct lc4 *lc4, int c)
 }
 
 static int
-lc4_encrypt(struct lc4 *lc4, int v, int mark)
+lc4_encrypt(struct lc4 *lc4, int v)
 {
     int pt = lc4_value(v);
     if (pt != -1) {

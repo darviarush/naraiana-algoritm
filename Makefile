@@ -1,8 +1,10 @@
 .PHONY: all dub clean
 
-all: elsie-four-x
-	./elsie-four-x test.txt a 10240 1 3
+all: elsie-four-k
+	./elsie-four-k test.txt a 10240 1 3 a
 
+elsie-four-k: elsie-four-k.c elsie-four-k.h
+	gcc -static -o elsie-four-k elsie-four-k.c
 
 elsie-four-x: elsie-four-x.c elsie-four/lc4.h
 	gcc -static -o elsie-four-x elsie-four-x.c
