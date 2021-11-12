@@ -66,7 +66,7 @@ int main(int ac, char **av)
         memset(&lc4, 0, sizeof(lc4));
         lc4_init(&lc4, key);
         for (i = 0; i < iteration_count; i++)
-            fprintf(q, "%c", lc4_encrypt(&lc4, symbol, mark));
+            fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
 
         fclose(q);
     }
