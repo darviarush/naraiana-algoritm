@@ -2,19 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
  
-#include "elsie-four/lc.h"
+#include "elsie-four-k.h"
  
 int main(int ac, char **av)
 {
 // Шифрувальна програма має отримувати з командного рядка такі дані:
 // 0) назва ключового файлу;
 // 1) символ, який буде зашифровуватися;
-// 2) кількість ітерацій шифрування симполу з попереднього пункту №1;
+// 2) кількість ітерацій шифрування символу з попереднього пункту №1;
 // 3) початковий рядок у ключовому файлі - перший ключ для шифрування;
 // 4) кінцевий рядок у ключовому файлі - останній ключ для шифрування.
+// 5) символ мiтки
 
-    if(ac != 6) {
-        fprintf(stderr, "usage: %s file symbol iteration_count from_line to_line\n", av[0]);
+    if(ac != 7) {
+        fprintf(stderr, "usage: %s file symbol iteration_count from_line to_line mark\n", av[0]);
         return 1;
     }
 
@@ -23,6 +24,7 @@ int main(int ac, char **av)
     int iteration_count = atoi(av[3]);
     int from_line = atoi(av[4])-1;
     int to_line = atoi(av[5])-1;
+    int mark = av[6][0];
 
     FILE* f = fopen(file, "rb");
     if(!f) { perror(file); return 1; }
@@ -55,7 +57,7 @@ int main(int ac, char **av)
 
         key[36] = '\0';
      
-        snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
+        snprintf(out_file, sizeof(out_file), "keys/%s %c %c.txt", key, symbol, mark);
         FILE* q = fopen(out_file, "wb");
         if(!q) { perror(out_file); return 1; }
 
@@ -64,7 +66,7 @@ int main(int ac, char **av)
         memset(&lc4, 0, sizeof(lc4));
         lc4_init(&lc4, key);
         for (i = 0; i < iteration_count; i++)
-            fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
+            fprintf(q, "%c", lc4_encrypt(&lc4, symbol, mark));
 
         fclose(q);
     }
