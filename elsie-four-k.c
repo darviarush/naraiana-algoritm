@@ -14,7 +14,7 @@ int main(int ac, char **av)
 // 4) кінцевий рядок у ключовому файлі - останній ключ для шифрування.
 // 5) символ мiтки
 
-    if(ac != 7) {
+    if(ac != 6) {
         fprintf(stderr, "usage: %s file symbol iteration_count from_line to_line mark\n", av[0]);
         return 1;
     }
@@ -24,7 +24,7 @@ int main(int ac, char **av)
     int iteration_count = atoi(av[3]);
     int from_line = atoi(av[4])-1;
     int to_line = atoi(av[5])-1;
-    int mark = av[6][0];
+    //int mark = av[6][0];
 
     FILE* f = fopen(file, "rb");
     if(!f) { perror(file); return 1; }
@@ -57,14 +57,15 @@ int main(int ac, char **av)
 
         key[36] = '\0';
      
-        snprintf(out_file, sizeof(out_file), "keys/%s %c %c.txt", key, symbol, mark);
+        snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
         FILE* q = fopen(out_file, "wb");
         if(!q) { perror(out_file); return 1; }
 
 
+		printf("key=%s\n", key);
         struct lc4 lc4;
         memset(&lc4, 0, sizeof(lc4));
-        lc4_init(&lc4, key, mark);
+        lc4_init(&lc4, key);
         for (i = 0; i < iteration_count; i++)
             fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
 
