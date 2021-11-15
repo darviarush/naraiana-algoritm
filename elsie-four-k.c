@@ -64,7 +64,7 @@ int main(int ac, char **av)
         //         return 1;
         //     }
      
-        snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
+        snprintf(out_file, sizeof(out_file), "keys/%s %c %c.txt", key, symbol, mark);
         FILE* q = fopen(out_file, "wb");
         if(!q) { perror(out_file); return 1; }
 
