@@ -61,11 +61,9 @@ int main(int ac, char **av)
         FILE* q = fopen(out_file, "wb");
         if(!q) { perror(out_file); return 1; }
 
-
-		printf("key=%s\n", key);
         struct lc4 lc4;
         memset(&lc4, 0, sizeof(lc4));
-        lc4_init(&lc4, key);
+        lc4_init(&lc4, key, mark);
         for (i = 0; i < iteration_count; i++)
             fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
 
