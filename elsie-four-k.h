@@ -61,12 +61,18 @@ lc4_valid(const char *key)
 }
 
 static void
-lc4_init(struct lc4 *lc4, const char *key)
+lc4_init(struct lc4 *lc4, const char *key, int mark)
 {
     int i;
     lc4->i = 0;
     lc4->j = 0;
+
     for (i = 0; i < 36; i++) {
+        if(key[i] == mark) {
+            lc4->i = i / 6;
+            lc4->j = i % 6;
+        }
+
         int k = lc4_value(key[i]);
         lc4->s[i / 6][i % 6] = k;
         lc4->rev[k] = i;
@@ -118,7 +124,6 @@ lc4_encrypt(struct lc4 *lc4, int v)
         if (j == y) i = (i + 1);
         lc4->i = (i + ct / 6) % 6;
         lc4->j = (j + ct) % 6;
-		printf("i=%i j=%i\n", i, j);
         return lc4_char(ct);
     }
     return 0;
