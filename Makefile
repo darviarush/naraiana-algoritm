@@ -1,7 +1,7 @@
 .PHONY: fx all dub clean
 
 all: elsie-four-k
-	./elsie-four-k test1.txt 9 10240 1 4
+	./elsie-four-k test1.txt 9 10240 1 4 a
 
 fx: elsie-four-x
 	./elsie-four-x test1.txt a 10240 1 1
