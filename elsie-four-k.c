@@ -56,6 +56,13 @@ int main(int ac, char **av)
         if(line < from_line) continue;
 
         key[36] = '\0';
+
+        // for(int i=0; i<35; i++)
+        // for(int j=i+1; j<36; j++)
+        //     if(key[i] == key[j]) {
+        //         fprintf(stderr, "file %s line %i: dublicat symbol `%c` on columns %i and %i!\n", file, line, key[i], i, j);
+        //         return 1;
+        //     }
      
         snprintf(out_file, sizeof(out_file), "keys/%s %c.txt", key, symbol);
         FILE* q = fopen(out_file, "wb");
@@ -63,7 +70,12 @@ int main(int ac, char **av)
 
         struct lc4 lc4;
         memset(&lc4, 0, sizeof(lc4));
-        lc4_init(&lc4, key, mark);
+        
+        if(lc4_init(&lc4, key, mark) != 1) {
+            fprintf(stderr, "file %s line %i: line without mark `%c`!\n", file, line, mark);
+            return 1;
+        }
+
         for (i = 0; i < iteration_count; i++)
             fprintf(q, "%c", lc4_encrypt(&lc4, symbol));
 

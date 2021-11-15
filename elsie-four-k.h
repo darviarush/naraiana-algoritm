@@ -60,23 +60,24 @@ lc4_valid(const char *key)
     return !key[36];
 }
 
-static void
+static int
 lc4_init(struct lc4 *lc4, const char *key, int mark)
 {
-    int i;
-    lc4->i = 0;
-    lc4->j = 0;
+    int i, is_set_mark = 0;
 
     for (i = 0; i < 36; i++) {
         if(key[i] == mark) {
             lc4->i = i / 6;
             lc4->j = i % 6;
+            is_set_mark = 1;
         }
 
         int k = lc4_value(key[i]);
         lc4->s[i / 6][i % 6] = k;
         lc4->rev[k] = i;
     }
+
+    return is_set_mark;
 }
 
 static void
