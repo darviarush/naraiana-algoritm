@@ -4,7 +4,7 @@ all: elsie-four-k
 	./elsie-four-k test.txt 9 10240 1 4 a
 
 fx: elsie-four-x
-	./elsie-four-x test1.txt a 10240 1 1
+	./elsie-four-x test.txt a 10240 1 4
 
 
 elsie-four-k: elsie-four-k.c elsie-four-k.h

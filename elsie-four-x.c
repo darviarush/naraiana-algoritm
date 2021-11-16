@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
  
-#include "elsie-four/lc.h"
+#include "elsie-four/lc4.h"
  
 int main(int ac, char **av)
 {
